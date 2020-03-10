@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TicTacToe</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div class="text">
+	<h1>TicTacToe</h1>
+	<h2 id="wins">X 0 wins - O 0 wins</h2>
+</div>
+
+<div class="background">
+<div class="wrapper">
+    <div class="gameboard">
+        <div onclick="newClick(1)" class="cell"><img id="cell1" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(2)" class="cell"><img id="cell2" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(3)" class="cell"><img id="cell3" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(4)" class="cell"><img id="cell4" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(5)" class="cell"><img id="cell5" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(6)" class="cell"><img id="cell6" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(7)" class="cell"><img id="cell7" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(8)" class="cell"><img id="cell8" src="./assets/TicE.png" /></div>
+        <div onclick="newClick(9)" class="cell"><img id="cell9" src="./assets/TicE.png" /></div>
+    </div>
+    <div class="buttonback">
+        <button class="button" onclick="newGame()">New Game</button>
+    </div>
+</div>
+</div>
+
+<script>
+document.body.style.backgroundColor = "#535557";
+var game = ['','','','','','','','',''];
+var turn = 0;
+var xwins = 0;
+var owins = 0;
+
+function newGame() {
+	game = ['','','','','','','','',''];
+	turn = 0;
+	var string = "X " + xwins +  " wins - O " + owins + " wins"
+	document.getElementById("wins").innerHTML = string;
+    for(i = 0; i < 9; i++){
+    	var id = "cell" + (i+1);
+    	document.getElementById(id).src = "./assets/TicE.png";
+    }
+}
+function newClick(num) {
+	if(game[num-1] == ""){
+		if(turn == 0){
+			var cell = "cell" + num
+    		document.getElementById(cell).src = "./assets/TicX.png";
+    		game[num-1] = "X"
+    		turn = 1;
+    		checkEnd(game);
+		}else{
+			var cell = "cell" + num
+			document.getElementById(cell).src = "./assets/TicO.png";
+    		game[num-1] = "O"
+			turn = 0;
+			checkEnd(game);
+		}	
+	}
+
+}
+function checkEnd(game) {
+
+	for(i = 0; i < 3; i++){
+		var row = i * 3;
+		if(game[row] == "X" || game[row] == "O"){
+			if(game[row] == game[row+1] && game[row+1] == game[row+2]){
+				alert("Player " + game[row] + " won!")
+				if(game[row] == "X"){
+					xwins = xwins + 1;
+				}else{
+					owins = owins + 1;
+				}
+			}	
+		}
+	}
+
+	for(i = 0; i < 3; i++){
+		if(game[i] == "X" || game[i] == "O"){
+			if(game[i] == game[i+3] && game[i+3] == game[i+6]){
+				alert("Player " + game[i] + " won!")
+				if(game[i] == "X"){
+					xwins = xwins + 1;
+				}else{
+					owins = owins + 1;
+				}
+			}	
+		}
+	}
+
+
+	if(game[0] == "X" || game[0] == "O"){
+		if(game[0] == game[4] && game[4] == game[8]){
+			alert("Player " + game[0] + " won!")
+				if(game[0] == "X"){
+					xwins = xwins + 1;
+				}else{
+					owins = owins + 1;
+				}
+		}	
+	}
+
+	if(game[6] == "X" || game[6] == "O"){
+		if(game[6] == game[4] && game[4] == game[2]){
+			alert("Player " + game[6] + " won!")
+				if(game[6] == "X"){
+					xwins = xwins + 1;
+				}else{
+					owins = owins + 1;
+				}
+		}	
+	}
+}
+</script>
+
+</body>
+</html>
